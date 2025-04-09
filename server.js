@@ -1078,3 +1078,36 @@ function notifyMultipleControllers() {
     io.emit('SPXMessage2Client', data);    
   }, 100); // small delay
 }
+
+// Add this before the server.listen call
+app.get('/debug/files', (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+  
+  function getDirectoryStructure(dir, prefix = '') {
+    const items = fs.readdirSync(dir);
+    let structure = '';
+    
+    items.forEach(item => {
+      const fullPath = path.join(dir, item);
+      const stats = fs.statSync(fullPath);
+      
+      if (stats.isDirectory()) {
+        structure += `${prefix}📁 ${item}/\n`;
+        structure += getDirectoryStructure(fullPath, prefix + '  ');
+      } else {
+        structure += `${prefix}📄 ${item}\n`;
+      }
+    });
+    
+    return structure;
+  }
+  
+  try {
+    const rootDir = process.cwd();
+    const structure = getDirectoryStructure(rootDir);
+    res.send(`<pre>${structure}</pre>`);
+  } catch (error) {
+    res.status(500).send(`Error: ${error.message}`);
+  }
+});
