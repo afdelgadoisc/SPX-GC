@@ -100,7 +100,8 @@ if (fs.existsSync(envIdfile)) {
 global.rundownData = {} 
 // --------------------------------------------------------------------
 
-const port = process.env.PORT || config.general.port || 5656;
+const port = process.env.PORT || 10000; // Default to 10000 for Render.com
+console.log('Starting server with port:', port);
 global.CCGSockets = [];
 global.LastBrowsedTemplateFolder = '';
 
