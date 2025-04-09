@@ -2,7 +2,7 @@ services:
   - type: web
     name: spx-gc
     env: node
-    buildCommand: npm install
+    buildCommand: chmod +x render-build.sh && ./render-build.sh
     startCommand: node server.js
     envVars:
       - key: NODE_ENV
