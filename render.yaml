@@ -9,5 +9,7 @@ services:
         value: production
       - key: PORT
         value: 10000
+      - key: HOST
+        value: 0.0.0.0
     healthCheckPath: /
     autoDeploy: true 
