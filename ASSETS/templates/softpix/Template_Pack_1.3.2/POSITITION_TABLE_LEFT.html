@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+
+    (c) 2024 SPX Graphics
+    Demo template for SPX. See SPXGCTemplateDefinition -object below for data field descriptions.
+    Need custom templates? Get in touch! https://spx.graphics/contact
+
+	PLEASE SEE THE LICENSE FILE FOR TERMS AND CONDITIONS.  
+
+    ▸ spx.graphics | Copyright 2021-2024 SPX Graphics <https://spx.graphics>
+    
+    Version: ##-version-## / ##-comment-##
+    Build: ##-builddate-## 
+
+	----
+
+	Changes:
+    29.06.2022 Added FPS value check from SPX renderer
+    24.08.2022 Fixed bug FPS value check (if not available)
+    06.05.2024 Replaced GSAP with AnimeJS. Simplified source.
+
+-->
+
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>POSITITION_TABLE_LEFT</title>
+    <script type="text/javascript" src="js/lib/anime.min.js"></script>
+    <script type="text/javascript" src="js/spx_interface.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" id="DynamicTheme" href="themes/Default.css" />
+    <style>
+
+        .SPXWindow {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            position: absolute;
+        }
+
+        #gfx {
+            gap: 0;
+            border:0;
+            opacity: 0 /* animated */;
+            z-index: 10;
+            display:flex;
+            bottom: 30vh;
+            position: absolute;
+            flex-direction: column;
+            transform-origin: bottom left;
+            border-left: var(--theme-accent-width)
+                         solid 
+                         var(--theme-brandColor);
+        }
+
+        #box1 {
+            font-size: 3vw;
+            font-family: 'BOLD';
+            padding: 0.1em 0.5em;
+        }
+
+        #details {
+            gap: 0; 
+            display: flex;
+            flex-direction: row;
+        }
+
+        #box3,
+        #box4 {
+            font-size: 2.0vw;
+            font-family: "REGU";
+            padding: 0.2em 0;
+        }
+
+        #text2 {
+            padding: 0 0.8em;
+        }
+
+        #text3 {
+            padding-right: 0.8em;
+        }
+
+    </style>
+
+    <script>
+
+        let clipNone = "inset(0%   0% 0% 0%)";
+        let clipEast = "inset(0% 100% 0% 0%)";
+        let clipSout = "inset(0% 0% 100% 0%)";
+        
+        function runTemplateUpdate() {
+            e('DynamicTheme').href = e('f99').innerText;
+			
+            e('text1').innerHTML = htmlDecode(e('f0').innerText);
+			
+            e('text-equipo1').innerHTML = htmlDecode(e('equipo1').innerText);
+			e('text-pts1').innerHTML = htmlDecode(e('pts1').innerText);
+			e('text-pj1').innerHTML = htmlDecode(e('pj1').innerText);
+			e('text-pg1').innerHTML = htmlDecode(e('pg1').innerText);
+			e('text-pe1').innerHTML = htmlDecode(e('pe1').innerText);
+			e('text-pp1').innerHTML = htmlDecode(e('pp1').innerText);
+			e('text-gf1').innerHTML = htmlDecode(e('gf1').innerText);
+			e('text-gc1').innerHTML = htmlDecode(e('gc1').innerText);
+			e('text-dg1').innerHTML = htmlDecode(e('dg1').innerText);
+			
+			e('text-equipo2').innerHTML = htmlDecode(e('equipo2').innerText);
+			e('text-pts2').innerHTML = htmlDecode(e('pts2').innerText);
+			e('text-pj2').innerHTML = htmlDecode(e('pj2').innerText);
+			e('text-pg2').innerHTML = htmlDecode(e('pg2').innerText);
+			e('text-pe2').innerHTML = htmlDecode(e('pe2').innerText);
+			e('text-pp2').innerHTML = htmlDecode(e('pp2').innerText);
+			e('text-gf2').innerHTML = htmlDecode(e('gf2').innerText);
+			e('text-gc2').innerHTML = htmlDecode(e('gc2').innerText);
+			e('text-dg2').innerHTML = htmlDecode(e('dg2').innerText);
+			
+			e('text-equipo3').innerHTML = htmlDecode(e('equipo3').innerText);
+			e('text-pts3').innerHTML = htmlDecode(e('pts3').innerText);
+			e('text-pj3').innerHTML = htmlDecode(e('pj3').innerText);
+			e('text-pg3').innerHTML = htmlDecode(e('pg3').innerText);
+			e('text-pe3').innerHTML = htmlDecode(e('pe3').innerText);
+			e('text-pp3').innerHTML = htmlDecode(e('pp3').innerText);
+			e('text-gf3').innerHTML = htmlDecode(e('gf3').innerText);
+			e('text-gc3').innerHTML = htmlDecode(e('gc3').innerText);
+			e('text-dg3').innerHTML = htmlDecode(e('dg3').innerText);
+
+			e('box1').style.display='flex';
+            e('box3').style.display='flex';
+			
+			const spanHeader = document.getElementById('text1');
+			const imgHeader = document.createElement('img');
+			imgHeader.src = './img/logo-sin-fondo.png';
+			imgHeader.style.width = '400px';
+			imgHeader.style.height = '150px';
+			imgHeader.style.marginLeft = '0.5em';
+			imgHeader.style.verticalAlign = 'middle';
+			spanHeader.appendChild(imgHeader);
+			
+			const span1 = document.getElementById('text-equipo1');
+			const img1 = document.createElement('img');
+			img1.src = htmlDecode(e('escudo1').innerText);
+			img1.style.width = '80px';
+			img1.style.height = '80px';
+			img1.style.marginLeft = '0.5em';
+			img1.style.verticalAlign = 'middle';
+			span1.appendChild(img1);
+			
+			const span2 = document.getElementById('text-equipo2');
+			const img2 = document.createElement('img');
+			img2.src = htmlDecode(e('escudo2').innerText);
+			img2.style.width = '80px';
+			img2.style.height = '80px';
+			img2.style.marginLeft = '0.5em';
+			img2.style.verticalAlign = 'middle';
+			span2.appendChild(img2);
+			
+			const span3 = document.getElementById('text-equipo3');
+			const img3 = document.createElement('img');
+			img3.src = htmlDecode(e('escudo3').innerText);
+			img3.style.width = '80px';
+			img3.style.height = '80px';
+			img3.style.marginLeft = '0.5em';
+			img3.style.verticalAlign = 'middle';
+			span3.appendChild(img3);
+
+
+            setTimeout(runAnimationIN, 50);
+        } // runTemplateUpdate
+
+        function runAnimationIN() {
+
+            var timelineIn = anime.timeline({
+                easing:   'easeOutCubic',
+                duration: 500
+            })
+
+            .add({
+                targets:    ['#gfx'],
+                opacity:    [0,1],
+                duration:   50,
+                easing:     'linear'
+            },0)
+
+            .add({
+                targets:    ['#box1'],
+                duration:   300, 
+                clipPath:   [clipEast,clipNone],
+                opacity:    [0,1],
+            },50)
+            
+            .add({
+                targets:    ['#text1'],
+                opacity:    { value: [0,1], duration: 300},
+                translateX: { value: ['50%','0%'], duration: 800 },
+            },0)
+
+            .add({
+                targets:    ['#box3', '#box4', '#text2', '#text3', 
+								'#text-equipo1', '#text-pts1', '#text-pj1', '#text-pg1', '#text-pe1','#text-pp1', '#text-gf1','#text-gc1', '#text-dg1',
+								'#text-equipo2', '#text-pts2', '#text-pj2', '#text-pg2', '#text-pe2', '#text-pp2', '#text-gf2','#text-gc2', '#text-dg2',
+								'#text-equipo3', '#text-pts3', '#text-pj3', '#text-pg3', '#text-pe3', '#text-pp3', '#text-gf3','#text-gc3', '#text-dg3'],
+                opacity:    { value: [0,1], duration: 50, easing: 'linear'},
+                translateY: { value: ['-100%','0%'], duration: 500 },
+                delay:      anime.stagger(100)
+            },50);
+
+        } // runAnimationIN
+
+        function runAnimationOUT() {
+
+            var timelineOut = anime.timeline({
+                easing:   'easeInCubic',
+                duration: 600
+            })
+
+            .add({
+                targets:    ['#text1'],
+                translateX: { value: ['50%'] },
+            },0)
+
+            .add({
+                targets:    ['#text3', '#text2',
+								'#text-equipo1', '#text-pts1', '#text-pj1', '#text-pg1', '#text-pe1','#text-pp1', '#text-gf1','#text-gc1', '#text-dg1',
+								'#text-equipo2', '#text-pts2', '#text-pj2', '#text-pg2', '#text-pe2','#text-pp2', '#text-gf2','#text-gc2', '#text-dg2',
+								'#text-equipo3', '#text-pts3', '#text-pj3', '#text-pg3', '#text-pe3','#text-pp3', '#text-gf3','#text-gc3', '#text-dg3'],
+                opacity:    { value: 0, duration: 200, easing: 'linear'},
+                delay:      anime.stagger(100)
+            },100)
+
+            .add({
+                targets:    ['#gfx'],
+                clipPath:   clipEast,
+                opacity:    { value: 0, duration: 200, delay: 500},
+            },100)
+            
+            .add({
+                targets:    '#logoLeft',
+                clipPath:   clipEast,
+                duration:   200,
+            },500)
+            ;
+
+        } // runAnimationOUT
+
+        window.SPXGCTemplateDefinition = {
+            "description": "Namestrap left",
+            "playserver": "OVERLAY",
+            "playchannel": "1",
+            "playlayer": "5",
+            "webplayout": "5",
+            "out": "manual",
+            "dataformat": "json",
+            "uicolor": "3",
+            "DataFields": [
+                {
+                    "field" : "comment",
+                    "ftype" : "textfield",
+                    "title" : "Nickname of this item on the rundown",
+                    "value" : "[ Item nickname ]"
+                },
+                {
+                    "ftype" : "instruction",
+                    "value" : "You can leave any field empty for a different style. This is an example from the default template pack. For more templates see ▶ spx.graphics/store"
+                },
+                {
+                    "field" : "f0",
+                    "ftype" : "textfield",
+                    "title" : "Table name",
+                    "value" : "Grupo A - Deportivo News"
+                },
+                {
+                    "field" : "equipo1",
+                    "ftype" : "textfield",
+                    "title" : "Nombre equipo 1",
+                    "value" : "Equipo 1"
+                },
+				{
+                    "field": "escudo1",
+                    "ftype": "filelist",
+                    "title": "Escudo equipo 1",
+                    "assetfolder" : "./img/escudos" ,
+                    "extension" : "png",
+                    "value": "./img/escudos/mexico.png",
+                },  
+				{
+                    "field" : "pts1",
+                    "ftype" : "textfield",
+                    "title" : "puntos equipo 1",
+                    "value" : "3"
+                },
+				{
+                    "field" : "pj1",
+                    "ftype" : "textfield",
+                    "title" : "partidos jugados equipo 1",
+                    "value" : "1"
+                },
+				{
+                    "field" : "pg1",
+                    "ftype" : "textfield",
+                    "title" : "partidos ganados equipo 1",
+                    "value" : "1"
+                },
+				{
+                    "field" : "pe1",
+                    "ftype" : "textfield",
+                    "title" : "partidos empatados equipo 1",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pp1",
+                    "ftype" : "textfield",
+                    "title" : "partidos perdidos equipo 1",
+                    "value" : "0"
+                },
+				{
+                    "field" : "gf1",
+                    "ftype" : "textfield",
+                    "title" : "goles a favor equipo 1",
+                    "value" : "3"
+                },
+				{
+                    "field" : "gc1",
+                    "ftype" : "textfield",
+                    "title" : "goles en contra equipo 1",
+                    "value" : "2"
+                },
+				{
+                    "field" : "dg1",
+                    "ftype" : "textfield",
+                    "title" : "diferencia gol equipo 1",
+                    "value" : "1"
+                },
+				{
+                    "field" : "equipo2",
+                    "ftype" : "textfield",
+                    "title" : "Nombre equipo 2",
+                    "value" : "Equipo 2"
+                },
+				{
+                    "field": "escudo2",
+                    "ftype": "filelist",
+                    "title": "Escudo equipo 2",
+                    "assetfolder" : "./img/escudos" ,
+                    "extension" : "png",
+                    "value": "./img/escudos/peru.png",
+                },  
+				{
+                    "field" : "pts2",
+                    "ftype" : "textfield",
+                    "title" : "puntos equipo 2",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pj2",
+                    "ftype" : "textfield",
+                    "title" : "partidos jugados equipo 2",
+                    "value" : "1"
+                },
+				{
+                    "field" : "pg2",
+                    "ftype" : "textfield",
+                    "title" : "partidos ganados equipo 2",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pe2",
+                    "ftype" : "textfield",
+                    "title" : "partidos empatados equipo 2",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pp2",
+                    "ftype" : "textfield",
+                    "title" : "partidos perdidos equipo 2",
+                    "value" : "1"
+                },
+				{
+                    "field" : "gf2",
+                    "ftype" : "textfield",
+                    "title" : "goles a favor equipo 2",
+                    "value" : "2"
+                },
+				{
+                    "field" : "gc2",
+                    "ftype" : "textfield",
+                    "title" : "goles en contra equipo 2",
+                    "value" : "3"
+                },
+				{
+                    "field" : "dg2",
+                    "ftype" : "textfield",
+                    "title" : "diferencia gol equipo 2",
+                    "value" : "-1"
+                },
+				{
+                    "field" : "equipo3",
+                    "ftype" : "textfield",
+                    "title" : "Nombre equipo 3",
+                    "value" : "Equipo 2"
+                },
+				{
+                    "field": "escudo3",
+                    "ftype": "filelist",
+                    "title": "Escudo equipo 3",
+                    "assetfolder" : "./img/escudos" ,
+                    "extension" : "png",
+                    "value": "./img/escudos/ipiales.png",
+                },  
+				{
+                    "field" : "pts3",
+                    "ftype" : "textfield",
+                    "title" : "puntos equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pj3",
+                    "ftype" : "textfield",
+                    "title" : "partidos jugados equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pg3",
+                    "ftype" : "textfield",
+                    "title" : "partidos ganados equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pe3",
+                    "ftype" : "textfield",
+                    "title" : "partidos empatados equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "pp3",
+                    "ftype" : "textfield",
+                    "title" : "partidos perdidos equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "gf3",
+                    "ftype" : "textfield",
+                    "title" : "goles a favor equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "gc3",
+                    "ftype" : "textfield",
+                    "title" : "goles en contra equipo 3",
+                    "value" : "0"
+                },
+				{
+                    "field" : "dg3",
+                    "ftype" : "textfield",
+                    "title" : "diferencia gol equipo 3",
+                    "value" : "0"
+                },
+                {
+                    "field": "f99",
+                    "ftype": "filelist",
+                    "title": "Visual theme",
+                    "assetfolder" : "./themes/" ,
+                    "extension" : "css",
+                    "value": "./themes/Motorsport.css",
+                }  
+
+            ]
+        };
+
+    </script>
+</head>
+
+<body>
+
+    <div class="SPXWindow table-left">
+        <div id="logoLeft"></div>
+        <div id="gfx">
+			<div id="box1" class="darkOnLite"><span id="text1"></span></div>
+			<div id="box3" class="darkOnLite"></div>
+			<div id="box3" class="darkOnLite">
+				<span id="text-header">POS</span>
+				<span id="text-header2">EQUIPO</span>
+				<span id="text-header">PTS</span>
+				<span id="text-header">PJ</span>
+				<span id="text-header">PG</span>
+				<span id="text-header">PE</span>
+				<span id="text-header">PP</span>
+				<span id="text-header">GF</span>
+				<span id="text-header">GC</span>
+				<span id="text-header">DG</span>
+			</div>
+			<div id="box3" class="darkOnLite">
+				<span id="text-pos1">1</span>
+				<span id="text-equipo1"></span>
+				<span id="text-pts1"></span>
+				<span id="text-pj1"></span>
+				<span id="text-pg1"></span>
+				<span id="text-pe1"></span>
+				<span id="text-pp1"></span>
+				<span id="text-gf1"></span>
+				<span id="text-gc1"></span>
+				<span id="text-dg1"></span>
+			</div>
+			<div id="box3" class="darkOnLite">
+				<span id="text-pos1">2</span>
+				<span id="text-equipo2"></span>
+				<span id="text-pts2"></span>
+				<span id="text-pj2"></span>
+				<span id="text-pg2"></span>
+				<span id="text-pe2"></span>
+				<span id="text-pp2"></span>
+				<span id="text-gf2"></span>
+				<span id="text-gc2"></span>
+				<span id="text-dg2"></span>
+			</div>
+			<div id="box3" class="darkOnLite">
+				<span id="text-pos3">3</span>
+				<span id="text-equipo3"></span>
+				<span id="text-pts3"></span>
+				<span id="text-pj3"></span>
+				<span id="text-pg3"></span>
+				<span id="text-pe3"></span>
+				<span id="text-pp3"></span>
+				<span id="text-gf3"></span>
+				<span id="text-gc3"></span>
+				<span id="text-dg3"></span>
+			</div>            
+        </div>
+    </div>
+
+    <div id="hiddenSpxData" data-info="See styles.css">
+        <div data-info="TableName....." id="f0"></div>
+        <div data-info="equipo1....." id="equipo1"></div>
+		<div data-info="Escudo1........" id="escudo1"></div>
+        <div data-info="pts1......" id="pts1"></div>
+        <div data-info="pj1........" id="pj1"></div>
+		<div data-info="pg1........" id="pg1"></div>
+		<div data-info="pe1........" id="pe1"></div>
+		<div data-info="pp1........" id="pp1"></div>
+		<div data-info="gf1........" id="gf1"></div>
+		<div data-info="gc1........" id="gc1"></div>
+		<div data-info="dg1........" id="dg1"></div>
+		
+		<div data-info="equipo2....." id="equipo2"></div>
+		<div data-info="Escudo2........" id="escudo2"></div>
+        <div data-info="pts2......" id="pts2"></div>
+        <div data-info="pj2........" id="pj2"></div>
+		<div data-info="pg2........" id="pg2"></div>
+		<div data-info="pe2........" id="pe2"></div>
+		<div data-info="pp2........" id="pp2"></div>
+		<div data-info="gf2........" id="gf2"></div>
+		<div data-info="gc2........" id="gc2"></div>
+		<div data-info="dg2........" id="dg2"></div>
+		
+		
+		<div data-info="equipo3....." id="equipo3"></div>
+		<div data-info="Escudo3........" id="escudo3"></div>
+        <div data-info="pts3......" id="pts3"></div>
+        <div data-info="pj3........" id="pj3"></div>
+		<div data-info="pg3........" id="pg3"></div>
+		<div data-info="pe3........" id="pe3"></div>
+		<div data-info="pp3........" id="pp3"></div>
+		<div data-info="gf3........" id="gf3"></div>
+		<div data-info="gc3........" id="gc3"></div>
+		<div data-info="dg3........" id="dg3"></div>
+		
+		<div data-info="Theme........" id="f99"></div>
+    </div>
+
+</body>
+</html>
