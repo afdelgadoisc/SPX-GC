@@ -1,4 +1,3 @@
-
 // ===============================================================
 //
 // "SPX Graphics Controller"
@@ -101,7 +100,7 @@ if (fs.existsSync(envIdfile)) {
 global.rundownData = {} 
 // --------------------------------------------------------------------
 
-const port = config.general.port || 5656;
+const port = process.env.PORT || config.general.port || 5656;
 global.CCGSockets = [];
 global.LastBrowsedTemplateFolder = '';
 
@@ -901,7 +900,11 @@ process.on('uncaughtException', function(err) {
 });    
 
 
-var server = app.listen(port, (err) => {
+var server = app.listen(port, '0.0.0.0', (err) => {
+  if (err) {
+    console.error('Error starting server:', err);
+    process.exit(1);
+  }
 
   let splash = '  Copyright 2020- SPX Graphics\n\n' +
   `  SPX Server version ........ ${global.vers}\n` +  
@@ -911,8 +914,9 @@ var server = app.listen(port, (err) => {
   `  Cfg / host-id (name) ...... ${global.pmac} (${config.general.hostname})\n`  +
   `  Cfg / loglevel ............ ${config.general.loglevel} (options: error | warn | info | verbose | debug )\n` + 
   `  Cfg / dataroot ............ ${path.resolve(config.general.dataroot)}\n`  +  
-  `  Cfg / logfolder ........... ${logDirectory}\n`; 
-  /* `  Cfg / lauchchrome ...... ${config.general.launchchrome}\n` */
+  `  Cfg / logfolder ........... ${logDirectory}\n` + 
+  `  Environment ............... ${process.env.NODE_ENV || 'development'}\n` +
+  `  Port ...................... ${port}\n`;
 
   if (config.general.apikey && config.general.apikey != '') {
     splash += `  Cfg / apikey ........... Set in config.json\n`;

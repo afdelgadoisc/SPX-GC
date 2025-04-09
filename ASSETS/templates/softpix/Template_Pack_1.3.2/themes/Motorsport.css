@@ -1,7 +1,7 @@
 :root {
   --theme-lite-color: black;
   --theme-dark-color: white;
-  --theme-brandColor: rgb(198, 0, 0);
+  --theme-brandColor: #214f8c;
   --theme-tickerBack: white;
 
   --theme-accent-width: 1vw;
@@ -12,6 +12,7 @@
   --theme-viewport-padding-bottom: 2vw;
 
   --theme-skew: -10deg;
+  --theme-skew-table: 0deg;
 
 }
 
@@ -45,7 +46,7 @@
   background-color: rgb(40, 42, 42);
   text-transform: uppercase;
   text-shadow: 0 4px 4px rgb(0, 0, 0);
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #214f8c;
   background-image: linear-gradient(
     180deg,
     rgb(14, 14, 14) 25%,
@@ -71,7 +72,7 @@
 
 #text2:after {
   content: '‣';
-  color: rgb(198, 0, 0);
+  color: #214f8c;
   font-family: 'BLAC';
   font-size: 1.4em;
   margin-left: 0.5em;
@@ -80,7 +81,7 @@
 }
   
 #text3 {
-  color: rgb(255, 0, 0);
+  color: #214f8c;
 }
 
 #box4 {
@@ -225,3 +226,294 @@
 #tickerText{
   color: white !important;
 }
+
+/* NUEVOS ESTILOS PERSONALIZADOS PARA TABLA A LA IZQUIERDA */
+
+.table-left #gfx {
+  transform: skewX(var(--theme-skew-table));
+}
+
+.table-left #box3 {
+  border-radius: 0 0 0 0;
+}
+
+.table-left #box3,
+.table-left #box4 {
+  background-color: black);
+  text-transform: uppercase;
+  text-shadow: 0 4px 4px rgb(0, 0, 0);
+  border-bottom: 0px solid #214f8c;
+  background-image: linear-gradient(
+    180deg,
+    rgb(14, 14, 14) 100%,
+    rgb(47, 47, 47) 60%);
+}
+
+#text-header {
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-header:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-header2 {
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+  padding: 0 0.8em;
+  width: 500px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-header2:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.5em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pos1,
+#text-pos2,
+#text-pos3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pos1:before,
+#text-pos2:before,
+#text-pos3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-equipo1,
+#text-equipo2,
+#text-equipo3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 500px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+}
+
+#text-equipo1:before,
+#text-equipo2:before,
+#text-equipo3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pts1,
+#text-pts2,
+#text-pts3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pts1:before,
+#text-pts2:before,
+#text-pts3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pj1,
+#text-pj2,
+#text-pj3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pj1:before,
+#text-pj2:before,
+#text-pj3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pg1,
+#text-pg2,
+#text-pg3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pg1:before,
+#text-pg2:before,
+#text-pg3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pe1,
+#text-pe2,
+#text-pe3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pe1:before,
+#text-pe2:before,
+#text-pe3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-pp1,
+#text-pp2,
+#text-pp3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-pp1:before,
+#text-pp2:before,
+#text-pp3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-gf1,
+#text-gf2,
+#text-gf3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-gf1:before,
+#text-gf2:before,
+#text-gf3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-gc1,
+#text-gc2,
+#text-gc3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-gc1:before,
+#text-gc2:before,
+#text-gc3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+#text-dg1,
+#text-dg2,
+#text-dg3 {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  padding: 0 0.8em;
+  width: 130px;         /* Ancho fijo */
+  display: inline-block; /* Necesario para que el width funcione correctamente */
+  white-space: nowrap;   /* Opcional: evita que el texto se divida en varias líneas */
+}
+
+#text-dg1:before,
+#text-dg2:before,
+#text-dg3:before {
+  content: '|';
+  color: #214f8c;
+  font-family: 'BOLD';
+  font-size: 1.5em;
+  margin-right: 0.4em;
+  line-height: 1em;
+  text-shadow: 0 0 0.2em rgb(0, 0, 0);
+}
+
+
