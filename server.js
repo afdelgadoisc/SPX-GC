@@ -972,7 +972,8 @@ var server = app.listen(port, '0.0.0.0', (err) => {
   console.log('  ' + line3s);
   console.log('');
 
-  if ( config.general.launchBrowser || global.generatingDefaultConfig ) {
+  // Only try to open browser in development environment
+  if ((config.general.launchBrowser || global.generatingDefaultConfig) && process.env.NODE_ENV !== 'production') {
     try {
       (async () => {
         require("openurl").open(`http://${ipad}:${port}/`)
